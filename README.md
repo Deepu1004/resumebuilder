@@ -1,6 +1,3 @@
-Creating a `README.md` file for your Resume Builder application involves providing a clear and concise overview of your project, its features, and how to use it. Since you have two repositories—one for the code and another for images—you can link to the images repository for visuals. Below is a sample `README.md` file for your Resume Builder application:
-
-```markdown
 # Resume Builder
 
 ![Resume Builder Logo](https://github.com/yourusername/resume-builder-images/blob/main/logo.png)
