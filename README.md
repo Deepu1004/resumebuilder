@@ -28,8 +28,45 @@ Resume Builder is a web application designed to help users create, customize, an
 ![Editor View](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Form.png)
 *Real-time editor with preview functionality.*
 
-
 ## Getting Started
+
+To run the Resume Builder project locally, follow these steps:
+
+### Prerequisites
+- Ensure you have **Node.js** installed on your system. You can download it from [Node.js official website](https://nodejs.org/).
+
+### Installation & Running the Project
+
+1. **Clone the Repository**  
+   Open your terminal or command prompt and run:  
+   ```sh
+   git clone https://github.com/Deepu1004/resumebuilder.git
+   ```
+   
+2. **Navigate to the Project Directory**  
+   ```sh
+   cd resumebuilder
+   ```
+
+3. **Install Dependencies**  
+   Install all required node modules by running:  
+   ```sh
+   npm install
+   ```
+
+4. **Run the Development Server**  
+   Start the application using:  
+   ```sh
+   npm run dev
+   ```
+
+5. **Open the Application**  
+   Once the server is running, open your browser and go to:  
+   ```
+   http://localhost:5173
+   ```
+
+Now, you can start building and customizing your resume with the Resume Builder! 🚀
 
 
 ## Usage
