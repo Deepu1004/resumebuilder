@@ -1,6 +1,8 @@
 # Resume Builder
 
-![Resume Builder Logo](https://github.com/yourusername/resume-builder-images/blob/main/logo.png)
+![Resume Builder Logo](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/ResumeBuilder.png)
+
+**[Live Demo]([https://your-live-demo-link.com](https://resume-assemble.vercel.app/))** 🚀
 
 ## Overview
 
