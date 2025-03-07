@@ -16,14 +16,16 @@ Resume Builder is a web application designed to help users create, customize, an
 
 ## Screenshots
 
-![Home Page](https://github.com/yourusername/resume-builder-images/blob/main/home-page.png)
+![Home Page](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/HomePage.png)
 *Home page showcasing available templates.*
 
-![Editor View](https://github.com/yourusername/resume-builder-images/blob/main/editor-view.png)
+![Template Selection](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/TemplateSelection.png)
+![Seperate Templates](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Templates.png)
+*Wide range of Templates to select.*
+
+![Editor View](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Form.png)
 *Real-time editor with preview functionality.*
 
-![Download Option](https://github.com/yourusername/resume-builder-images/blob/main/download-option.png)
-*Easy download options for your customized resume.*
 
 ## Getting Started
 
