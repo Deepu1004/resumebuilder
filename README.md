@@ -2,7 +2,7 @@
 
 ![Resume Builder Logo](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Logo.jpeg)
 
-## **[Live Demo](https://resume-assemble.vercel.app/)** 🚀
+## **[Live Demo](https://snap-resume-builder.vercel.app/)** 🚀
 
 ## Overview
 
