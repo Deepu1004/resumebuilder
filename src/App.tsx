@@ -14,7 +14,7 @@ function App() {
       <Router>
         <div className="min-h-screen bg-gray-50">
           <Navbar />
-          <div className="container mx-auto px-4">
+          <div>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/templates" element={<TemplateSelection />} />

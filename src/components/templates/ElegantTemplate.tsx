@@ -15,6 +15,7 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
     projects,
     languages,
     certifications,
+    achievements,
   } = resumeData;
 
   return (
@@ -41,7 +42,7 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
               {personalInfo.email && (
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 mr-2" />
-                  <span>{personalInfo.email}</span>
+                  <span>{personalInfo.email.replace("@gmail.com", "")}</span>
                 </div>
               )}
               {personalInfo.phone && (
@@ -71,7 +72,7 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
                   <Linkedin className="h-4 w-4 mr-2" />
                   <span>
                     {personalInfo.linkedin.replace(
-                      "https://linkedin.com/in/",
+                      "https://www.linkedin.com/in/",
                       "",
                     )}
                   </span>
@@ -92,9 +93,9 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
 
       <div className="flex flex-col md:flex-row flex-1 p-6">
         {/* Left Column */}
-        <div className="w-full md:w-1/3 bg-white p-6 shadow-md">
+        <div className="w-full md:w-1/3 bg-white p-6 shadow-md space-y-8">
           {/* Skills */}
-          <div className="mb-8">
+          <div>
             <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
               Skills
             </h2>
@@ -118,7 +119,7 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
 
           {/* Languages */}
           {languages.length > 0 && languages[0].language && (
-            <div className="mb-8">
+            <div>
               <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
                 Languages
               </h2>
@@ -135,7 +136,7 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
 
           {/* Certifications */}
           {certifications.length > 0 && certifications[0].name && (
-            <div className="mb-8">
+            <div>
               <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
                 Certifications
               </h2>
@@ -148,6 +149,29 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {/* Achievements */}
+          {achievements.length > 0 && achievements[0].title && (
+            <div>
+              <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
+                Achievements
+              </h2>
+              <div className="space-y-4">
+                {achievements.map((achievement, index) => (
+                  <div key={index}>
+                    <h3 className="font-medium text-gray-800">
+                      {achievement.title}
+                    </h3>
+                    {achievement.description && (
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {achievement.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
@@ -176,10 +200,10 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
         </div>
 
         {/* Right Column */}
-        <div className="w-full md:w-2/3 p-6">
+        <div className="w-full md:w-2/3 p-6 space-y-8">
           {/* Summary */}
           {personalInfo.summary && (
-            <div className="mb-8">
+            <div>
               <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
                 Professional Summary
               </h2>
@@ -188,7 +212,7 @@ const ModernElegance: React.FC<ModernEleganceProps> = ({ resumeData }) => {
           )}
 
           {/* Experience */}
-          <div className="mb-8">
+          <div>
             <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
               Work Experience
             </h2>

@@ -15,42 +15,104 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
     experience,
     skills,
     projects,
-    languages,
     certifications,
+    achievements,
   } = resumeData;
 
+  const getImageUrl = (url: string): string => {
+    if (!url) return "";
+
+    try {
+      // Try creating a URL object to validate the URL
+      new URL(url);
+
+      if (url.includes("drive.google.com")) {
+        let fileId = "";
+
+        if (url.includes("/file/d/")) {
+          const match = url.match(/\/file\/d\/([^/]+)/);
+          if (match && match[1]) fileId = match[1];
+        } else if (url.includes("?id=")) {
+          const match = url.match(/id=([^&]+)/);
+          if (match && match[1]) fileId = match[1];
+        } else if (url.includes("/d/")) {
+          const match = url.match(/\/d\/([^/]+)/);
+          if (match && match[1]) fileId = match[1];
+        }
+
+        if (fileId) {
+          // Return valid direct link for Google Drive
+          return `https://drive.google.com/uc?export=view&id=${fileId}`;
+        }
+      }
+
+      if (url.includes("dropbox.com")) {
+        return url.replace("?dl=0", "?raw=1");
+      }
+
+      return url;
+    } catch (e) {
+      // If URL is invalid, return empty string
+      console.error("Invalid URL:", url);
+      return "";
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full bg-white text-gray-900">
+    <div
+      className="flex flex-col h-full bg-white text-gray-900"
+      style={{ fontFamily: '"Inter", sans-serif' }}
+    >
       {/* Header */}
       <div className="bg-white text-gray-900 p-8 border-b-2 border-gray-300">
         <div className="flex flex-col md:flex-row items-center gap-6">
           {personalInfo.photoUrl && (
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-300">
-              <img
-                src={personalInfo.photoUrl}
-                alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
-                className="w-full h-full object-cover"
-              />
+              <a
+                href={personalInfo.linkedin || personalInfo.github || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full h-full relative"
+              >
+                <img
+                  src={getImageUrl(personalInfo.photoUrl)}
+                  alt={`${personalInfo.firstName} ${personalInfo.lastName}`}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    img.onerror = null;
+                    img.src =
+                      "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg";
+                    img.style.opacity = "0.7";
+                  }}
+                  loading="eager"
+                />
+              </a>
             </div>
           )}
           <div className="flex-1">
-            <h1 className="text-4xl font-bold text-gray-800">
+            <h1 className="text-4xl font-bold text-gray-800 leading-tight">
               {personalInfo.firstName} {personalInfo.lastName}
             </h1>
             <p className="text-xl mt-1 text-gray-600">{personalInfo.title}</p>
-
             <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
               {personalInfo.email && (
-                <div className="flex items-center">
-                  <Mail className="h-4 w-4 mr-2 text-gray-600" />
-                  <span>{personalInfo.email}</span>
-                </div>
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  <span>{personalInfo.email.replace("@gmail.com", "")}</span>
+                </a>
               )}
               {personalInfo.phone && (
-                <div className="flex items-center">
-                  <Phone className="h-4 w-4 mr-2 text-gray-600" />
+                <a
+                  href={`tel:${personalInfo.phone}`}
+                  className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  <Phone className="h-4 w-4 mr-2" />
                   <span>{personalInfo.phone}</span>
-                </div>
+                </a>
               )}
               {(personalInfo.city || personalInfo.state) && (
                 <div className="flex items-center">
@@ -63,29 +125,44 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
                 </div>
               )}
               {personalInfo.website && (
-                <div className="flex items-center">
-                  <Globe className="h-4 w-4 mr-2 text-gray-600" />
+                <a
+                  href={personalInfo.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  <Globe className="h-4 w-4 mr-2" />
                   <span>{personalInfo.website}</span>
-                </div>
+                </a>
               )}
               {personalInfo.linkedin && (
-                <div className="flex items-center">
-                  <Linkedin className="h-4 w-4 mr-2 text-gray-600" />
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  <Linkedin className="h-4 w-4 mr-2" />
                   <span>
                     {personalInfo.linkedin.replace(
-                      "https://linkedin.com/in/",
+                      "https://www.linkedin.com/in/",
                       "",
                     )}
                   </span>
-                </div>
+                </a>
               )}
               {personalInfo.github && (
-                <div className="flex items-center">
-                  <Github className="h-4 w-4 mr-2 text-gray-600" />
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+                >
+                  <Github className="h-4 w-4 mr-2" />
                   <span>
                     {personalInfo.github.replace("https://github.com/", "")}
                   </span>
-                </div>
+                </a>
               )}
             </div>
           </div>
@@ -94,9 +171,9 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
 
       <div className="flex flex-col md:flex-row flex-1 p-6">
         {/* Left Column */}
-        <div className="w-full md:w-1/3 bg-gray-100 p-6">
+        <div className="w-full md:w-1/3 bg-gray-100 p-6 space-y-8">
           {/* Skills */}
-          <div className="mb-8">
+          <div>
             <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
               Skills
             </h2>
@@ -118,26 +195,9 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
             </div>
           </div>
 
-          {/* Languages */}
-          {languages.length > 0 && languages[0].language && (
-            <div className="mb-8">
-              <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
-                Languages
-              </h2>
-              <ul className="space-y-2">
-                {languages.map((lang, index) => (
-                  <li key={index} className="flex justify-between">
-                    <span className="font-medium">{lang.language}</span>
-                    <span className="text-gray-600">{lang.proficiency}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
           {/* Certifications */}
           {certifications.length > 0 && certifications[0].name && (
-            <div className="mb-8">
+            <div>
               <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
                 Certifications
               </h2>
@@ -160,7 +220,7 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
             </h2>
             <div className="space-y-4">
               {education.map((edu, index) => (
-                <div key={index} className="mb-4">
+                <div key={index}>
                   <div className="font-bold">{edu.institution}</div>
                   <div>
                     {edu.degree} {edu.fieldOfStudy && `in ${edu.fieldOfStudy}`}
@@ -178,19 +238,21 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
         </div>
 
         {/* Right Column */}
-        <div className="w-full md:w-2/3 p-6">
+        <div className="w-full md:w-2/3 p-6 space-y-8">
           {/* Summary */}
           {personalInfo.summary && (
-            <div className="mb-8">
+            <div>
               <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
                 Professional Summary
               </h2>
-              <p>{personalInfo.summary}</p>
+              <p className="text-gray-700 leading-relaxed">
+                {personalInfo.summary}
+              </p>
             </div>
           )}
 
           {/* Experience */}
-          <div className="mb-8">
+          <div>
             <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
               Work Experience
             </h2>
@@ -211,7 +273,16 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
                       {exp.startDate} - {exp.endDate}
                     </div>
                   </div>
-                  {exp.description && <p className="mt-2">{exp.description}</p>}
+                  {exp.description && (
+                    <p className="text-gray-700 mt-2 leading-relaxed">
+                      {exp.description.split("\n").map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -245,7 +316,30 @@ const CreativeMinimalist: React.FC<CreativeMinimalistProps> = ({
                       </div>
                     )}
                     {project.description && (
-                      <p className="mt-2">{project.description}</p>
+                      <p className="text-gray-700 mt-2 leading-relaxed">
+                        {project.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Achievements */}
+          {achievements.length > 0 && achievements[0].title && (
+            <div>
+              <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
+                Achievements
+              </h2>
+              <div className="space-y-6">
+                {achievements.map((achievement, index) => (
+                  <div key={index}>
+                    <h3 className="font-bold text-lg">{achievement.title}</h3>
+                    {achievement.description && (
+                      <p className="text-gray-700 mt-2 leading-relaxed">
+                        {achievement.description}
+                      </p>
                     )}
                   </div>
                 ))}

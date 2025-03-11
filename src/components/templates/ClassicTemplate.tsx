@@ -13,8 +13,8 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ resumeData }) => {
     experience,
     skills,
     projects,
-    languages,
     certifications,
+    achievements,
   } = resumeData;
 
   // Determine margin class based on data length
@@ -31,16 +31,22 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ resumeData }) => {
 
         <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-600">
           {personalInfo.email && (
-            <div className="flex items-center">
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="flex items-center text-gray-600 hover:text-blue-600"
+            >
               <Mail className="h-3 w-3 mr-1 text-gray-500" />
-              <span>{personalInfo.email}</span>
-            </div>
+              <span>{personalInfo.email.replace("@gmail.com","")}</span>
+            </a>
           )}
           {personalInfo.phone && (
-            <div className="flex items-center">
+            <a
+              href={`tel:${personalInfo.phone}`}
+              className="flex items-center text-gray-600 hover:text-blue-600"
+            >
               <Phone className="h-3 w-3 mr-1 text-gray-500" />
               <span>{personalInfo.phone}</span>
-            </div>
+            </a>
           )}
           {(personalInfo.city || personalInfo.state) && (
             <div className="flex items-center">
@@ -53,26 +59,44 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ resumeData }) => {
             </div>
           )}
           {personalInfo.website && (
-            <div className="flex items-center">
+            <a
+              href={personalInfo.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-gray-600 hover:text-blue-600"
+            >
               <Globe className="h-3 w-3 mr-1 text-gray-500" />
               <span>{personalInfo.website}</span>
-            </div>
+            </a>
           )}
           {personalInfo.linkedin && (
-            <div className="flex items-center">
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-gray-600 hover:text-blue-600"
+            >
               <Linkedin className="h-3 w-3 mr-1 text-gray-500" />
               <span>
-                {personalInfo.linkedin.replace("https://linkedin.com/in/", "")}
+                {personalInfo.linkedin.replace(
+                  "https://www.linkedin.com/in/",
+                  "",
+                )}
               </span>
-            </div>
+            </a>
           )}
           {personalInfo.github && (
-            <div className="flex items-center">
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-gray-600 hover:text-blue-600"
+            >
               <Github className="h-3 w-3 mr-1 text-gray-500" />
               <span>
                 {personalInfo.github.replace("https://github.com/", "")}
               </span>
-            </div>
+            </a>
           )}
         </div>
       </div>
@@ -212,17 +236,21 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ resumeData }) => {
         </div>
       )}
 
-      {/* Languages */}
-      {languages.length > 0 && languages[0].language && (
+      {/* Achievements */}
+      {achievements.length > 0 && achievements[0].title && (
         <div className="mb-4">
-          <h2 className="text-lg font-bold uppercase tracking-wider text-gray-900 border-b border-gray-300 pb-1 mb-2">
-            Languages
+          <h2 className="text-lg font-bold uppercase tracking-wider text-gray-900 border-b border-gray-300 pb-1 mb-2 flex items-center">
+            Achievements
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
-            {languages.map((lang, index) => (
-              <div key={index} className="flex justify-between text-sm">
-                <span className="text-gray-900">{lang.language}</span>
-                <span className="text-gray-600">{lang.proficiency}</span>
+          <div className="space-y-3">
+            {achievements.map((achievement, index) => (
+              <div key={index}>
+                <h3 className="font-bold text-gray-900 text-sm">
+                  {achievement.title}
+                </h3>
+                <p className="text-gray-700 text-sm">
+                  {achievement.description}
+                </p>
               </div>
             ))}
           </div>

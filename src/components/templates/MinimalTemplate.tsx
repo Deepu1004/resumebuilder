@@ -1,6 +1,14 @@
 import React from "react";
 import { ResumeData } from "../../context/ResumeContext";
-import { Mail, Phone, MapPin, Globe, Linkedin, Github } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
+  Linkedin,
+  Github,
+  Trophy,
+} from "lucide-react";
 
 interface ResumeTemplateProps {
   resumeData: ResumeData;
@@ -13,7 +21,7 @@ const MinimalistTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
     experience,
     skills,
     projects,
-    languages,
+    achievements,
     certifications,
   } = resumeData;
 
@@ -30,7 +38,7 @@ const MinimalistTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           {personalInfo.email && (
             <div className="flex items-center">
               <Mail className="h-4 w-4 mr-1" />
-              <span>{personalInfo.email}</span>
+              <span>{personalInfo.email.replace("@gmail.com", "")}</span>
             </div>
           )}
           {personalInfo.phone && (
@@ -47,8 +55,18 @@ const MinimalistTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           )}
           {personalInfo.linkedin && (
             <div className="flex items-center">
-              <Linkedin className="h-4 w-4 mr-1" />
-              <span>{personalInfo.linkedin}</span>
+              <Linkedin className="h-4 w-4 mr-1 text-gray-400" />
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                {personalInfo.linkedin.replace(
+                  "https://www.linkedin.com/in/",
+                  "",
+                )}
+              </a>
             </div>
           )}
           {personalInfo.github && (
@@ -159,37 +177,42 @@ const MinimalistTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           </section>
         )}
 
-        {/* Languages */}
-        {languages.length > 0 && languages[0].language && (
-          <section>
-            <h2 className="text-lg font-light uppercase tracking-wider mb-4 border-b pb-2">
-              Languages
+        {/* Achievements */}
+        {achievements.length > 0 && achievements[0].title && (
+          <div>
+            <h2 className="text-lg font-bold text-gray-800 border-b-2 border-gray-800 pb-1 mb-3 flex items-center">
+              Achievements
             </h2>
-            <div className="flex flex-wrap gap-4">
-              {languages.map((lang, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <span className="font-medium">{lang.language}</span>
-                  <span className="text-gray-600">({lang.proficiency})</span>
+            <div className="space-y-6">
+              {achievements.map((achievement, index) => (
+                <div key={index}>
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-bold text-lg">{achievement.title}</h3>
+                  </div>
+                  {achievement.description && (
+                    <p className="mt-2">{achievement.description}</p>
+                  )}
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         )}
+
         {/* Certifications */}
         {certifications.length > 0 && certifications[0].name && (
-          <section className="mt-8">
-            <h2 className="text-lg font-light uppercase tracking-wider mb-4 border-b pb-2">
+          <section>
+            <h2 className="text-lg font-light uppercase tracking-wider mb-3 border-b pb-1">
               Certifications
             </h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
               {certifications.map((cert, index) => (
-                <li key={index} className="border p-4 rounded-lg shadow-sm">
-                  <div className="font-medium">{cert.name}</div>
-                  <div className="text-gray-600">{cert.issuer}</div>
-                  <div className="text-sm text-gray-500">{cert.date}</div>
-                </li>
+                <div key={index}>
+                  <h3 className="font-medium">{cert.name}</h3>
+                  <p className="text-sm text-gray-600">{cert.issuer}</p>
+                  <p className="text-sm text-gray-500">{cert.date}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </section>
         )}
       </div>

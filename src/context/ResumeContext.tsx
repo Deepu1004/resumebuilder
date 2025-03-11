@@ -53,7 +53,7 @@ export interface ResumeData {
   experience: Experience[];
   skills: Skill[];
   projects: Project[];
-  languages: { language: string; proficiency: string }[];
+  achievements: [title: string, description: string];
   certifications: { name: string; issuer: string; date: string }[];
 }
 
@@ -67,53 +67,53 @@ interface ResumeContextType {
 
 const defaultResumeData: ResumeData = {
   personalInfo: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: '',
-    title: '',
-    summary: '',
-    photoUrl: '',
-    website: '',
-    linkedin: '',
-    github: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    country: "",
+    title: "",
+    summary: "",
+    photoUrl: "",
+    website: "",
+    linkedin: "",
+    github: "",
   },
   education: [
     {
-      institution: '',
-      degree: '',
-      fieldOfStudy: '',
-      startDate: '',
-      endDate: '',
-      description: '',
+      institution: "",
+      degree: "",
+      fieldOfStudy: "",
+      startDate: "",
+      endDate: "",
+      description: "",
     },
   ],
   experience: [
     {
-      company: '',
-      position: '',
-      location: '',
-      startDate: '',
-      endDate: '',
-      description: '',
+      company: "",
+      position: "",
+      location: "",
+      startDate: "",
+      endDate: "",
+      description: "",
     },
   ],
-  skills: [{ name: '', level: 3 }],
+  skills: [{ name: "", level: 3 }],
   projects: [
     {
-      title: '',
-      description: '',
-      technologies: '',
-      link: '',
+      title: "",
+      description: "",
+      technologies: "",
+      link: "",
     },
   ],
-  languages: [{ language: '', proficiency: '' }],
-  certifications: [{ name: '', issuer: '', date: '' }],
+  achievements: [{title: "", description: ""}],
+  certifications: [{ name: "", issuer: "", date: "" }],
 };
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);

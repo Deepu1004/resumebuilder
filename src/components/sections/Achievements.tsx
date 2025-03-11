@@ -1,40 +1,41 @@
 import React from "react";
 import { Plus, Trash2 } from "lucide-react";
 import './Sections.css';
-interface SkillsProps {
+
+interface AchievementsProps {
   resumeData: {
-    skills: Array<{
-      name: string;
-      level: number;
+    achievements: Array<{
+      title: string;
+      description: string;
     }>;
   };
-  handleSkillChange: (
+  handleAchievementChange: (
     index: number,
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
-  addSkill: () => void;
-  removeSkill: (index: number) => void;
+  addAchievement: () => void;
+  removeAchievement: (index: number) => void;
 }
 
-const SkillsSection: React.FC<SkillsProps> = ({
+const AchievementsSection: React.FC<AchievementsProps> = ({
   resumeData,
-  handleSkillChange,
-  addSkill,
-  removeSkill,
+  handleAchievementChange,
+  addAchievement,
+  removeAchievement,
 }) => {
   return (
     <div className="space-y-8">
       {/* Add Button */}
       <div className="flex justify-end">
         <button
-          onClick={addSkill}
+          onClick={addAchievement}
           className="group relative flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-500 
                text-white py-3 px-6 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all 
                duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 
                active:bg-gradient-to-r active:from-blue-700 active:to-purple-700"
         >
           <Plus className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-          <span>Add Skill</span>
+          <span>Add Achievement</span>
           <div
             className="absolute inset-0 bg-white/5 transition-transform duration-500 
                  group-hover:translate-x-full rounded-xl"
@@ -42,9 +43,9 @@ const SkillsSection: React.FC<SkillsProps> = ({
         </button>
       </div>
 
-      {/* Skills Cards */}
+      {/* Achievements Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {resumeData.skills.map((skill, index) => (
+        {resumeData.achievements.map((achievement, index) => (
           <div
             key={index}
             className="glass-card group relative p-6 rounded-3xl overflow-hidden border-2 border-indigo-200 
@@ -64,11 +65,11 @@ const SkillsSection: React.FC<SkillsProps> = ({
                   className="text-xl font-semibold text-transparent bg-clip-text 
                            bg-gradient-to-r from-indigo-700 to-purple-700"
                 >
-                  Skill {index + 1}
+                  Achievement #{index + 1}
                 </h3>
-                {resumeData.skills.length > 1 && (
+                {resumeData.achievements.length > 1 && (
                   <button
-                    onClick={() => removeSkill(index)}
+                    onClick={() => removeAchievement(index)}
                     className="text-red-500 hover:text-red-600 transition-colors duration-300 
                                transform hover:scale-110"
                   >
@@ -78,50 +79,46 @@ const SkillsSection: React.FC<SkillsProps> = ({
               </div>
 
               <div className="space-y-6">
-                {/* Skill Name */}
+                {/* Achievement Title */}
                 <div className="relative group">
                   <label
                     className="block text-sm font-medium text-gray-700 mb-2 transition-colors 
                                    duration-300 group-focus-within:text-indigo-700"
                   >
-                    Skill Name
+                    Achievement Title
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    value={skill.name}
-                    onChange={(e) => handleSkillChange(index, e)}
+                    name="title"
+                    value={achievement.title}
+                    onChange={(e) => handleAchievementChange(index, e)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl 
                               placeholder-gray-400 focus:placeholder-transparent 
                               focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 
                               transition-all duration-300"
-                    placeholder="e.g. JavaScript, Project Management, etc."
+                    placeholder="e.g. 'Employee of the Year' or 'Project Excellence Award'"
                   />
                 </div>
 
-                {/* Proficiency Level */}
+                {/* Description */}
                 <div className="relative group">
                   <label
                     className="block text-sm font-medium text-gray-700 mb-2 transition-colors 
                                    duration-300 group-focus-within:text-indigo-700"
                   >
-                    Proficiency Level (1-5)
+                    Description
                   </label>
-                  <select
-                    name="level"
-                    value={skill.level}
-                    onChange={(e) => handleSkillChange(index, e)}
+                  <textarea
+                    name="description"
+                    value={achievement.description}
+                    onChange={(e) => handleAchievementChange(index, e)}
+                    rows={3}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl 
                               placeholder-gray-400 focus:placeholder-transparent 
                               focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 
-                              transition-all duration-300"
-                  >
-                    <option value={1}>1 - Beginner</option>
-                    <option value={2}>2 - Basic</option>
-                    <option value={3}>3 - Intermediate</option>
-                    <option value={4}>4 - Advanced</option>
-                    <option value={5}>5 - Expert</option>
-                  </select>
+                              transition-all duration-300 resize-none"
+                    placeholder="Briefly describe the achievement and its significance..."
+                  />
                 </div>
               </div>
             </div>
@@ -132,4 +129,4 @@ const SkillsSection: React.FC<SkillsProps> = ({
   );
 };
 
-export default SkillsSection;
+export default AchievementsSection;

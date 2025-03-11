@@ -8,6 +8,11 @@ import {
   Linkedin,
   Github,
   Code,
+  Trophy,
+  GraduationCap,
+  Briefcase,
+  Award,
+  ShieldCheck,
 } from "lucide-react";
 
 interface ResumeTemplateProps {
@@ -21,7 +26,7 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
     experience,
     skills,
     projects,
-    languages,
+    achievements,
     certifications,
   } = resumeData;
 
@@ -48,21 +53,34 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           </div>
           <div className="text-right text-sm">
             {personalInfo.email && (
-              <div className="flex items-center justify-end mb-1">
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="flex items-center justify-end mb-1 text-indigo-600 hover:text-indigo-800"
+              >
                 <Mail className="h-4 w-4 mr-2" />
                 <span>{personalInfo.email.replace("@gmail.com", "")}</span>
-              </div>
+              </a>
             )}
             {personalInfo.github && (
-              <div className="flex items-center justify-end mb-1">
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-end mb-1 text-indigo-600 hover:text-indigo-800"
+              >
                 <Github className="h-4 w-4 mr-2" />
                 <span>
                   {personalInfo.github.replace("https://github.com/", "")}
                 </span>
-              </div>
+              </a>
             )}
             {personalInfo.linkedin && (
-              <div className="flex items-center justify-end">
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-end text-indigo-600 hover:text-indigo-800"
+              >
                 <Linkedin className="h-4 w-4 mr-2" />
                 <span>
                   {personalInfo.linkedin.replace(
@@ -70,7 +88,7 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
                     "",
                   )}
                 </span>
-              </div>
+              </a>
             )}
           </div>
         </div>
@@ -81,7 +99,10 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
         <div className="col-span-1">
           {/* Education */}
           <section>
-            <h2 className="text-lg font-bold text-gray-900 mb-2">Education</h2>
+            <h2 className="text-lg font-bold text-gray-900 mb-2 flex items-center">
+              <GraduationCap className="h-5 w-5 mr-2 text-indigo-600" />
+              Education
+            </h2>
             <div className="space-y-3">
               {education.map((edu, index) => (
                 <div key={index}>
@@ -136,7 +157,8 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           {/* Certifications */}
           {certifications.length > 0 && certifications[0].name && (
             <section className="mb-4">
-              <h2 className="text-lg font-bold text-gray-900 mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-2 flex items-center">
+                <ShieldCheck className="h-5 w-5 mr-2 text-indigo-600" />
                 Certifications
               </h2>
               <div className="space-y-3">
@@ -157,7 +179,8 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           {/* Professional Summary */}
           {personalInfo.summary && (
             <section className="mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
+                <Briefcase className="h-5 w-5 mr-2 text-indigo-600" />
                 Technical Profile
               </h2>
               <p className="text-gray-700">{personalInfo.summary}</p>
@@ -165,7 +188,8 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           )}
           {/* Experience */}
           <section>
-            <h2 className="text-lg font-bold text-gray-900 mb-4">
+            <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+              <Briefcase className="h-5 w-5 mr-2 text-indigo-600" />
               Professional Experience
             </h2>
             <div className="space-y-4 mb-6">
@@ -192,7 +216,8 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
           {/* Projects */}
           {projects.length > 0 && projects[0].title && (
             <section className="mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                <Award className="h-5 w-5 mr-2 text-indigo-600" />
                 Technical Projects
               </h2>
               <div className="space-y-4">
@@ -226,6 +251,30 @@ const TechnicalTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
                         {project.description}
                       </p>
                     )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {/* Achievements */}
+          {achievements.length > 0 && achievements[0].title && (
+            <section className="mb-6">
+              <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                <Trophy className="h-5 w-5 mr-2 text-indigo-600" />
+                Achievements
+              </h2>
+              <div className="space-y-4">
+                {achievements.map((achievement, index) => (
+                  <div
+                    key={index}
+                    className="border-l-2 border-indigo-600 pl-4"
+                  >
+                    <h3 className="font-bold text-gray-900">
+                      {achievement.title}
+                    </h3>
+                    <p className="text-gray-700 mt-2">
+                      {achievement.description}
+                    </p>
                   </div>
                 ))}
               </div>

@@ -13,7 +13,7 @@ const MinimalTemplate: React.FC<MinimalTemplateProps> = ({ resumeData }) => {
     experience,
     skills,
     projects,
-    languages,
+    achievements,
     certifications,
   } = resumeData;
 
@@ -34,7 +34,7 @@ const MinimalTemplate: React.FC<MinimalTemplateProps> = ({ resumeData }) => {
                 href={`mailto:${personalInfo.email}`}
                 className="hover:underline"
               >
-                {personalInfo.email}
+                {personalInfo.email.replace("@gmail.com", "")}
               </a>
             </div>
           )}
@@ -78,7 +78,10 @@ const MinimalTemplate: React.FC<MinimalTemplateProps> = ({ resumeData }) => {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                {personalInfo.linkedin.replace("https://linkedin.com/in/", "")}
+                {personalInfo.linkedin.replace(
+                  "https://www.linkedin.com/in/",
+                  "",
+                )}
               </a>
             </div>
           )}
@@ -221,20 +224,26 @@ const MinimalTemplate: React.FC<MinimalTemplateProps> = ({ resumeData }) => {
             </div>
           </div>
 
-          {/* Languages */}
-          {languages.length > 0 && languages[0].language && (
+          {/* Achievements */}
+          {achievements.length > 0 && achievements[0].title && (
             <div>
               <h2 className="text-lg font-bold text-gray-800 mb-3">
-                Languages
+                Achievements
               </h2>
-              <ul className="space-y-1">
-                {languages.map((lang, index) => (
-                  <li key={index} className="flex justify-between">
-                    <span className="text-gray-800">{lang.language}</span>
-                    <span className="text-gray-500">{lang.proficiency}</span>
-                  </li>
+              <div className="space-y-4">
+                {achievements.map((achievement, index) => (
+                  <div key={index}>
+                    <h3 className="font-medium text-gray-800">
+                      {achievement.title}
+                    </h3>
+                    {achievement.description && (
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {achievement.description}
+                      </p>
+                    )}
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
 

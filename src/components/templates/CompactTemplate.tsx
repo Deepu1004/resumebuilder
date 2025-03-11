@@ -1,6 +1,14 @@
 import React from "react";
 import { ResumeData } from "../../context/ResumeContext";
-import { Mail, Phone, MapPin, Globe, Linkedin, Github } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
+  Linkedin,
+  Github,
+  Trophy,
+} from "lucide-react";
 
 interface ResumeTemplateProps {
   resumeData: ResumeData;
@@ -13,8 +21,8 @@ const CompactTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
     experience,
     skills,
     projects,
-    languages,
     certifications,
+    achievements,
   } = resumeData;
 
   return (
@@ -29,24 +37,62 @@ const CompactTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
         </div>
         <div className="text-right text-sm">
           {personalInfo.email && (
-            <div className="flex items-center justify-end gap-1">
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="flex items-center justify-end gap-1 text-gray-600 hover:text-blue-600"
+            >
               <Mail className="h-3 w-3" />
-              <span>{personalInfo.email}</span>
-            </div>
+              <span>{personalInfo.email.replace("@gmail.com", "")}</span>
+            </a>
           )}
           {personalInfo.phone && (
-            <div className="flex items-center justify-end gap-1">
+            <a
+              href={`tel:${personalInfo.phone}`}
+              className="flex items-center justify-end gap-1 text-gray-600 hover:text-blue-600"
+            >
               <Phone className="h-3 w-3" />
               <span>{personalInfo.phone}</span>
-            </div>
+            </a>
           )}
           {personalInfo.linkedin && (
-            <div className="flex items-center justify-end gap-1">
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-end gap-1 text-gray-600 hover:text-blue-600"
+            >
               <Linkedin className="h-3 w-3" />
               <span>
-                {personalInfo.linkedin.replace("https://linkedin.com/in/", "")}
+                {personalInfo.linkedin.replace(
+                  "https://www.linkedin.com/in/",
+                  "",
+                )}
               </span>
-            </div>
+            </a>
+          )}
+          {personalInfo.github && (
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-end gap-1 text-gray-600 hover:text-blue-600"
+            >
+              <Github className="h-3 w-3" />
+              <span>
+                {personalInfo.github.replace("https://github.com/", "")}
+              </span>
+            </a>
+          )}
+          {personalInfo.website && (
+            <a
+              href={personalInfo.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-end gap-1 text-gray-600 hover:text-blue-600"
+            >
+              <Globe className="h-3 w-3" />
+              <span>{personalInfo.website}</span>
+            </a>
           )}
         </div>
       </div>
@@ -128,6 +174,27 @@ const CompactTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
               </div>
             </section>
           )}
+
+          {/* Achievements - If available */}
+          {achievements.length > 0 && achievements[0].title && (
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-wider text-gray-900 mb-2 flex items-center">
+                Achievements
+              </h2>
+              <div className="space-y-3">
+                {achievements.map((achievement, index) => (
+                  <div key={index} className="text-sm">
+                    <h3 className="font-medium text-gray-900">
+                      {achievement.title}
+                    </h3>
+                    <p className="text-gray-700 mt-1 text-xs leading-normal">
+                      {achievement.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         {/* Sidebar - 4 columns */}
@@ -184,26 +251,6 @@ const CompactTemplate: React.FC<ResumeTemplateProps> = ({ resumeData }) => {
                     <div className="text-gray-600">
                       {cert.issuer} • {cert.date}
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Languages - If available */}
-          {languages.length > 0 && languages[0].language && (
-            <section>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-gray-900 mb-2">
-                Languages
-              </h2>
-              <div className="space-y-1">
-                {languages.map((lang, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between items-center text-xs"
-                  >
-                    <span className="text-gray-900">{lang.language}</span>
-                    <span className="text-gray-600">{lang.proficiency}</span>
                   </div>
                 ))}
               </div>
