@@ -1,6 +1,6 @@
 # Resume Builder
 
-![Resume Builder Logo](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/ResumeBuilder.png)
+![Resume Builder Logo](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Logo.jpeg)
 
 ## **[Live Demo](https://resume-assemble.vercel.app/)** 🚀
 
@@ -21,12 +21,15 @@ Resume Builder is a web application designed to help users create, customize, an
 ![Home Page](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/HomePage.png)
 *Home page showcasing available templates.*
 
-![Template Selection](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/TemplateSelection.png)
+
 ![Seperate Templates](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Templates.png)
 *Wide range of Templates to select.*
 
 ![Editor View](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Form.png)
 *Real-time editor with preview functionality.*
+
+![Preview Section](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Preview.png)
+*Live Updates in the preview section enhancing the user experience.*
 
 ## Getting Started
 
