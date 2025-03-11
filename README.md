@@ -22,7 +22,7 @@ Resume Builder is a web application designed to help users create, customize, an
 *Home page showcasing available templates.*
 
 
-![Seperate Templates](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Templates.png)
+![Templates Selection](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Templates.png)
 *Wide range of Templates to select.*
 
 ![Editor View](https://github.com/Deepu1004/Resume-Assemble-Public/blob/main/Images/Form.png)
